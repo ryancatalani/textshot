@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Textshot Chrome</title>
+
+	<style>
+		#textshot {
+			display: block;
+/*			width: 100%;
+			height: 500px;
+*/		}
+	</style>
+</head>
+<body>
+	<textarea name="quote_text" id="quote_text" cols="30" rows="10"></textarea>
+	<input type="text" id="quote_title" placeholder="Quote title">
+	<input type="text" id="quote_source" placeholder="Quote source">
+
+
+	<canvas id="textshot"></canvas>
+
+	<script>
+		window.onload = function() {
+			var quote_text, quote_title, quote_source, 
+				canvas, ctx,
+				qbounds, mbounds, sbounds;
+
+			var quote_width = 1024;
+			var quote_height = 512;
+			var t_ratio = 2;
+			var lr_padding = 60;
+			var tb_padding = 40;
+
+			var quote_text_el = document.getElementById('quote_text');
+			var quote_title_el = document.getElementById('quote_title');
+			var quote_source_el = document.getElementById('quote_source');
+
+			var style_font_family = 'Georgia';
+			var style_font_color = '#5A594F';
+			var style_max_font_size = 35;
+			var style_line_height_em = 1.4;
+
+			quote_text_el.onkeyup = function() { update_quote(); }
+			quote_title_el.onkeyup = function() { update_quote(); }
+			quote_source_el.onkeyup = function() { update_quote(); }
+
+			var test_text = function() {
+				quote_text_el.value = "With a few taps on a phone, for a fee, today’s hottest start-ups will help people on the lowest rungs of the 1 percent live like their betters in the 0.1 percent. These services give the modestly wealthy a chance to enjoy the cooks, cleaners, drivers, personal assistants and all the other lavish appointments that have defined extravagant wealth. As one critic tweeted, San Francisco’s tech industry “is focused on solving one problem: What is my mother no longer doing for me?”";
+				quote_title_el.value = "A Tech Boom Aimed at the Few Instead of the World";
+				quote_source_el.value = "The New York Times";
+				update_quote();
+
+			}
+
+			var update_quote = function() {
+				quote_text = quote_text_el.value;
+				quote_title = quote_title_el.value;
+				quote_source = quote_source_el.value;	
+				draw_quote();
+				// draw_bounds();
+			}
+
+			var setup_canvas = function() {
+				canvas = document.getElementById('textshot');
+				canvas.width = quote_width * t_ratio;
+				canvas.height = quote_height * t_ratio;
+				canvas.style.width = quote_width + "px";
+				canvas.style.height = quote_height + "px";
+
+				ctx = canvas.getContext('2d');
+				ctx.setTransform(t_ratio, 0, 0, t_ratio, 0, 0);
+
+				qbounds = {
+					x: lr_padding,
+					y: tb_padding,
+					width: quote_width - (lr_padding * 2),
+					height: quote_height - (tb_padding * 2) - 60
+				};
+				mbounds = {
+					x: lr_padding,
+					y: quote_height - tb_padding - 50,
+					width: quote_width - (lr_padding * 2),
+					height: 20
+				};
+				sbounds = {
+					x: lr_padding,
+					y: quote_height - tb_padding - 20,
+					width: quote_width - (lr_padding * 2),
+					height: 20
+				};
+
+				clear_canvas();
+			}
+
+			var clear_canvas = function(bounds) {
+				bounds = defaultFor(bounds, {
+					x: 0,
+					y: 0,
+					w: canvas.width,
+					h: canvas.height
+				});
+				ctx.clearRect(bounds.x, bounds.y, bounds.w, bounds.h);
+				ctx.fillStyle = '#FCFAEC';
+				ctx.fillRect(bounds.x, bounds.y, bounds.w, bounds.h);
+			}
+
+			var draw_bounds = function() {
+				ctx.fillStyle = 'rgba(255, 163, 122, 0.50)';
+				ctx.fillRect(qbounds.x, qbounds.y, qbounds.width, qbounds.height);
+				ctx.fillStyle = 'rgba(194, 255, 179, 0.50)';
+				ctx.fillRect(mbounds.x, mbounds.y, mbounds.width, mbounds.height);
+				ctx.fillStyle = 'rgba(147, 190, 255, 0.50)';
+				ctx.fillRect(sbounds.x, sbounds.y, sbounds.width, sbounds.height);
+			}
+
+			var draw_quote = function() {
+				clear_canvas();				
+				fit_and_wrap_text(quote_text, qbounds);
+				truncate_text(quote_title, mbounds, 20, 'bold');
+				truncate_text(quote_source, sbounds, 20, 'italic');
+			}
+
+			var truncate_text = function(text, bounds, font_size, font_attr) {
+				var words = text.split(' ');
+				var font_attr = defaultFor(font_attr, '');
+				ctx.font = font_attr + ' ' + font_size + 'px ' + style_font_family;
+				ctx.fillStyle = style_font_color;
+				ctx.textBaseline = 'top';
+
+				var line = '';
+				for (var i = 0; i < words.length; i++) {
+					var test_line = line + words[i] + ' ';
+					var metrics = ctx.measureText(test_line);
+					var test_line_width = metrics.width;
+					if (test_line_width > bounds.width) {
+						ctx.fillText(line + '…', bounds.x, bounds.y);
+						break;
+					} else {
+						line = test_line;
+					}
+				};
+				ctx.fillText(line, bounds.x, bounds.y);
+			}
+
+			var wrap_text = function(text, bounds, font_size, line_height) {
+				var words = text.split(' '); // TODO OR HYPHEN
+				var cur_y = bounds.y;
+
+				ctx.font = font_size + 'px ' + style_font_family;
+				ctx.fillStyle = style_font_color;
+				ctx.textBaseline = 'top';
+
+				var line = '';
+				for (var i = 0; i < words.length; i++) {
+					var test_line = line + words[i] + ' ';
+					var metrics = ctx.measureText(test_line);
+					var test_line_width = metrics.width;
+					if (test_line_width > bounds.width && i > 0) {
+						ctx.fillText(line, bounds.x, cur_y);
+						line = words[i] + ' ';
+						cur_y += line_height;
+					} else {
+						line = test_line;
+					}
+				};
+				ctx.fillText(line, bounds.x, cur_y);
+			}
+
+			var fit_and_wrap_text = function(text, bounds) {
+				var drawable_area = bounds.width * bounds.height;
+				
+				var char_count = text.split('').length;
+				var font_size = Math.floor(Math.sqrt(drawable_area / char_count) * 1.2);
+				if (font_size > style_max_font_size) {
+					font_size = style_max_font_size;
+				};
+				var line_height = style_line_height_em * font_size;
+
+				wrap_text(text, bounds, font_size, line_height)
+			}
+
+			var defaultFor = function(arg, val) {
+				return typeof arg !== 'undefined' ? arg : val;
+			}
+
+			setup_canvas();
+			test_text();
+		}
+	</script>
+</body>
+</html>
