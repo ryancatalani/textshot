@@ -38,15 +38,16 @@
 
 			var style_font_family = 'Georgia';
 			var style_font_color = '#5A594F';
-			var style_max_font_size = 35;
-			var style_line_height_em = 1.4;
+			var style_max_font_size = 60;
+			var style_line_height_em = 1.35;
 
 			quote_text_el.onkeyup = function() { update_quote(); }
 			quote_title_el.onkeyup = function() { update_quote(); }
 			quote_source_el.onkeyup = function() { update_quote(); }
 
 			var test_text = function() {
-				quote_text_el.value = "With a few taps on a phone, for a fee, today’s hottest start-ups will help people on the lowest rungs of the 1 percent live like their betters in the 0.1 percent. These services give the modestly wealthy a chance to enjoy the cooks, cleaners, drivers, personal assistants and all the other lavish appointments that have defined extravagant wealth. As one critic tweeted, San Francisco’s tech industry “is focused on solving one problem: What is my mother no longer doing for me?”";
+				// quote_text_el.value = "With a few taps on a phone, for a fee, today’s hottest start-ups will help people on the lowest rungs of the 1 percent live like their betters in the 0.1 percent. These services give the modestly wealthy a chance to enjoy the cooks, cleaners, drivers, personal assistants and all the other lavish appointments that have defined extravagant wealth. As one critic tweeted, San Francisco’s tech industry “is focused on solving one problem: What is my mother no longer doing for me?”";
+				quote_text_el.value = "No, no, say the start-ups that, today, look as if they’re targeting the rich. The nature of the tech business is that costs come down.";
 				quote_title_el.value = "A Tech Boom Aimed at the Few Instead of the World";
 				quote_source_el.value = "The New York Times";
 				update_quote();
@@ -79,7 +80,7 @@
 				};
 				mbounds = {
 					x: lr_padding,
-					y: quote_height - tb_padding - 50,
+					y: quote_height - tb_padding - 45,
 					width: quote_width - (lr_padding * 2),
 					height: 20
 				};
