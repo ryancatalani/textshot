@@ -49,3 +49,97 @@ table {
 	border-spacing: 0;
 }
 
+// texshot.it
+
+$break_width: 800px;
+
+@mixin clear {
+	&:after {
+		visibility: hidden;
+		display: block;
+		font-size: 0;
+		content: " ";
+		clear: both;
+		height: 0;
+	}	
+}
+
+@mixin base_font {
+	font: 14px/1.3em sans-serif;
+}
+
+body {
+	@include base_font;	
+}
+
+.wrap {
+	width: 95%;
+	margin: 0 auto;
+	@media(min-width: $break_width) {
+		width: 800px;
+	}
+}
+
+.col_50 {
+	width: 100%;
+	margin: 0 auto;
+	@media(min-width: $break_width) {
+		width: 49%;
+		float: left;
+		&:nth-child(2) {
+			margin-left: 2%;
+		}
+	}
+}
+
+nav {
+	@include clear;
+	li {
+		display: inline-block;
+		float: right;
+	}
+	.navlogo {
+		float: left;
+	}
+	.navuser {
+		img {
+			height: 18px;
+			width: 18px;
+		}
+	}
+}
+
+
+textarea, input[type=text] {
+	@include base_font;
+	width: 100%;
+	border: 1px solid #ccc;
+	padding: 0.75em;
+}
+
+.quote_input {
+	@include clear;
+	textarea {
+		height: 92px;
+	}
+	input[type=text] {
+		height: 41px;
+		margin-bottom: 10px;
+	}
+}
+
+.tweet_input {
+	@include clear;
+	position: relative;
+	#tweet_input_count {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	#tweet_input_btn {
+		position: absolute;
+		display: block;
+		bottom: 0;
+		right: 0;
+	}
+}

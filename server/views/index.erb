@@ -8,25 +8,46 @@
 </head>
 <body>
 	<nav>
-		<ul>
-			<li class="navlogo">textshot.it</li>
-			<li class="navuser">
-				<% if current_user %>
-					@<%= current_user[:nickname] %>
-					<img src="<%= current_user[:img] %>" alt="">
-					<a href="/signout">Sign out</a>
-				<% else %>
-					<a href="/auth/twitter">Sign in with Twitter</a>
-				<% end %>
-			</li>
-		</ul>
+		<div class="wrap">
+			<ul>
+				<li class="navlogo">textshot.it</li>
+				<li class="navuser">
+					<% if current_user %>
+						@<%= current_user[:nickname] %>
+						<img src="<%= current_user[:img] %>" alt="">
+						<a href="/signout">Sign out</a>
+					<% else %>
+						<a href="/auth/twitter">Sign in with Twitter</a>
+					<% end %>
+				</li>
+			</ul>	
+		</div>
 	</nav>
 
-	
+	<div class="wrap">
+		<div class="quote_input">
+			<div class="col_50">
+				<textarea name="quote_text" id="quote_text" cols="30" rows="10"></textarea>
+			</div>
+			<div class="col_50">
+				<input type="text" id="quote_title" placeholder="Quote title">
+				<input type="text" id="quote_source" placeholder="Quote source">
+			</div>
+		</div>
 
-	<textarea name="quote_text" id="quote_text" cols="30" rows="10"></textarea>
-	<input type="text" id="quote_title" placeholder="Quote title">
-	<input type="text" id="quote_source" placeholder="Quote source">
-	<canvas id="textshot"></canvas>
+		<div class="tweet_input">
+			<textarea name="tweet_input_composer" id="tweet_input_composer" cols="30" rows="3">
+				
+			</textarea>
+			<div id="tweet_input_count">116</div>
+			<a href="#" id="tweet_input_btn">Tweet</a>
+		</div>
+		
+
+		<div class="textshot_wrap">
+			<canvas id="textshot"></canvas>	
+		</div>		
+	</div>	
+	
 </body>
 </html>
