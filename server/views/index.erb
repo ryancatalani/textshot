@@ -4,8 +4,26 @@
 	<meta charset="UTF-8">
 	<title>Textshot.it</title>
 	<script src="textshot.js"></script>
+	<link rel="stylesheet" href="main.css">
 </head>
 <body>
+	<nav>
+		<ul>
+			<li class="navlogo">textshot.it</li>
+			<li class="navuser">
+				<% if current_user %>
+					@<%= current_user[:nickname] %>
+					<img src="<%= current_user[:img] %>" alt="">
+					<a href="/signout">Sign out</a>
+				<% else %>
+					<a href="/auth/twitter">Sign in with Twitter</a>
+				<% end %>
+			</li>
+		</ul>
+	</nav>
+
+	
+
 	<textarea name="quote_text" id="quote_text" cols="30" rows="10"></textarea>
 	<input type="text" id="quote_title" placeholder="Quote title">
 	<input type="text" id="quote_source" placeholder="Quote source">
