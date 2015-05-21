@@ -32,12 +32,15 @@
 			var t_ratio = 2;
 			var lr_padding = 60;
 			var tb_padding = 40;
+			var bot_lr_padding = 25;
 
 			var quote_text_el = document.getElementById('quote_text');
 			var quote_title_el = document.getElementById('quote_title');
 			var quote_source_el = document.getElementById('quote_source');
 
 			style = {
+				bkgd: '#FCFAEC',
+				sec_bkgd: '#EEECD8',
 				font_family: 'Georgia',
 				font_color: '#5A594F',
 				max_font_size: 60,
@@ -83,31 +86,34 @@
 					height: quote_height - (tb_padding * 2) - 60
 				};
 				mbounds = {
-					x: lr_padding,
-					y: quote_height - tb_padding - 45,
-					width: quote_width - (lr_padding * 2),
+					x: bot_lr_padding,
+					y: quote_height - 65,
+					width: quote_width - (bot_lr_padding * 2),
 					height: 20
 				};
 				sbounds = {
-					x: lr_padding,
-					y: quote_height - tb_padding - 20,
-					width: quote_width - (lr_padding * 2),
+					x: bot_lr_padding,
+					y: quote_height - 40,
+					width: quote_width - (bot_lr_padding * 2),
 					height: 20
 				};
 
 				clear_canvas();
 			}
 
-			var clear_canvas = function(bounds) {
-				bounds = defaultFor(bounds, {
+			var clear_canvas = function() {
+				bounds = {
 					x: 0,
 					y: 0,
 					w: canvas.width,
 					h: canvas.height
-				});
+				};
 				ctx.clearRect(bounds.x, bounds.y, bounds.w, bounds.h);
-				ctx.fillStyle = '#FCFAEC';
+				ctx.fillStyle = style.bkgd;
 				ctx.fillRect(bounds.x, bounds.y, bounds.w, bounds.h);
+
+				ctx.fillStyle = style.sec_bkgd;
+				ctx.fillRect(0, quote_height - tb_padding - 45, canvas.width, tb_padding + 45);
 			}
 
 			var draw_bounds = function() {
@@ -122,15 +128,15 @@
 			var draw_quote = function() {
 				clear_canvas();				
 				fit_and_wrap_text(quote_text, qbounds);
-				truncate_text(quote_title, mbounds, 20, 'bold');
-				truncate_text(quote_source, sbounds, 20, 'italic');
+				truncate_text(quote_title, mbounds, 20, 'bold', style.font_color);
+				truncate_text(quote_source, sbounds, 20, 'italic', style.font_color);
 			}
 
-			var truncate_text = function(text, bounds, font_size, font_attr) {
+			var truncate_text = function(text, bounds, font_size, font_attr, font_color) {
 				var words = text.split(' ');
 				var font_attr = defaultFor(font_attr, '');
 				ctx.font = font_attr + ' ' + font_size + 'px ' + style.font_family;
-				ctx.fillStyle = style.font_color;
+				ctx.fillStyle = font_color;
 				ctx.textBaseline = 'top';
 
 				var line = '';
