@@ -70,6 +70,7 @@ $break_width: 800px;
 
 body {
 	@include base_font;	
+	background: #F7F7F7;
 }
 
 .wrap {
@@ -94,6 +95,9 @@ body {
 
 nav {
 	@include clear;
+	background: #262A2D;
+	padding: 10px 0;
+	margin-bottom: 1em;
 	li {
 		display: inline-block;
 		float: right;
@@ -128,18 +132,25 @@ textarea, input[type=text] {
 	}
 }
 
-.tweet_input {
-	@include clear;
-	position: relative;
-	#tweet_input_count {
-		position: absolute;
-		top: 0;
-		right: 0;
-	}
-	#tweet_input_btn {
-		position: absolute;
-		display: block;
-		bottom: 0;
-		right: 0;
+.tweet_wrap {
+	background: #fff;
+	padding: 1em;
+	.tweet_input {
+		@include clear;
+		position: relative;
+		textarea {
+			border: 1px solid #E6E9E9;
+		}
+		#tweet_input_count {
+			position: absolute;
+			top: 5px;
+			right: 5px;
+		}
+		#tweet_input_btn {
+			position: absolute;
+			display: block;
+			bottom: 5px;
+			right: 5px;
+		}
 	}
 }

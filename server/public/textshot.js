@@ -50,6 +50,7 @@ window.onload = function() {
 		quote_title = quote_title_el.value;
 		quote_source = quote_source_el.value;	
 		draw_quote();
+		convert_quote_for_form();
 		// draw_bounds();
 	}
 
@@ -64,7 +65,7 @@ window.onload = function() {
 
 		for (var i = words.length - 1; i >= 0; i--) {
 			var word = words[i];
-			if (word.search(/https?:\/\/.+[.].+/) != -1) { // Liberal
+			if (word.search(/^https?:\/\/.+[.].+/) != -1) { // Liberal
 				count -= link_len;
 			} else {
 				count -= word.length;	
@@ -78,7 +79,9 @@ window.onload = function() {
 		canvas = document.getElementById('textshot');
 		canvas.width = quote_width * t_ratio;
 		canvas.height = quote_height * t_ratio;
-		size_canvas(canvas.parentElement.offsetWidth, canvas.parentElement.offsetWidth / 2)
+
+		w = canvas.parentElement.offsetWidth - parseInt(window.getComputedStyle(canvas.parentElement).paddingLeft) - parseInt(window.getComputedStyle(canvas.parentElement).paddingRight)
+		size_canvas(w, w / 2)
 
 		ctx = canvas.getContext('2d');
 		ctx.setTransform(t_ratio, 0, 0, t_ratio, 0, 0);
@@ -217,6 +220,13 @@ window.onload = function() {
 
 	var defaultFor = function(arg, val) {
 		return typeof arg !== 'undefined' ? arg : val;
+	}
+
+	var convert_quote_for_form = function() {
+		var dest = document.getElementById('tweet_input_img');
+		var header_len = 'data:image/png;base64,'.length
+		var data = canvas.toDataURL().substr(header_len);
+		dest.value = data;
 	}
 
 	setup_canvas();

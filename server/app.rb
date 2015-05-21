@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'omniauth-twitter'
+require 'twitter'
 
 configure do
 	set :sessions,
@@ -23,6 +24,17 @@ helpers do
 			secret: session[:twitter][:secret]
 		}
 	end
+
+	def twitter_client
+		return false if !current_user
+		client ||= Twitter::REST::Client.new do |config|
+			config.consumer_key = ENV['CONSUMER_KEY']
+			config.consumer_secret = ENV['CONSUMER_SECRET']
+			config.access_token = session[:twitter][:token]
+			config.access_token_secret = session[:twitter][:secret]
+		end
+		return client
+	end
 end
 
 get '/' do
@@ -43,5 +55,18 @@ end
 
 get '/signout' do
 	session[:twitter] = nil
+	redirect to('/')
+end
+
+post '/post_tweet' do
+	file = Tempfile.new('temp.png')
+	begin
+		file.write( Base64.decode64(params[:tweet_input_img]) )
+		file.rewind
+		twitter_client.update_with_media(params[:tweet_input_composer], file)
+	ensure
+		file.close
+		file.unlink
+	end
 	redirect to('/')
 end

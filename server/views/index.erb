@@ -35,18 +35,19 @@
 			</div>
 		</div>
 
-		<div class="tweet_input">
-			<textarea name="tweet_input_composer" id="tweet_input_composer" cols="30" rows="3">
-				
-			</textarea>
-			<div id="tweet_input_count">116</div>
-			<a href="#" id="tweet_input_btn">Tweet</a>
-		</div>
-		
+		<div class="tweet_wrap">
+			<form action="/post_tweet" method="post" enctype="multipart/form-data">
+				<div class="tweet_input">
+					<textarea name="tweet_input_composer" id="tweet_input_composer" cols="30" rows="3"></textarea>
+					<div id="tweet_input_count">116</div>
+					<input type="submit" id="tweet_input_btn" value="Tweet">
+				</div>
 
-		<div class="textshot_wrap">
-			<canvas id="textshot"></canvas>	
-		</div>		
+				<canvas id="textshot"></canvas>	
+				<input type="hidden" id="tweet_input_img" name="tweet_input_img">
+			</form>
+		</div>
+			
 	</div>	
 	
 </body>
