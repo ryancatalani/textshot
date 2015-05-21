@@ -43,6 +43,7 @@
 				sec_bkgd: '#EEECD8',
 				font_family: 'Georgia',
 				font_color: '#5A594F',
+				sec_font_color: '#95947F',
 				max_font_size: 60,
 				line_height_em: 1.4,
 				max_line_height_em: 1.25
@@ -88,13 +89,13 @@
 				mbounds = {
 					x: bot_lr_padding,
 					y: quote_height - 65,
-					width: quote_width - (bot_lr_padding * 2),
+					width: quote_width - (bot_lr_padding * 2) - 120,
 					height: 20
 				};
 				sbounds = {
 					x: bot_lr_padding,
 					y: quote_height - 40,
-					width: quote_width - (bot_lr_padding * 2),
+					width: quote_width - (bot_lr_padding * 2) - 120,
 					height: 20
 				};
 
@@ -114,6 +115,7 @@
 
 				ctx.fillStyle = style.sec_bkgd;
 				ctx.fillRect(0, quote_height - tb_padding - 45, canvas.width, tb_padding + 45);
+				draw_textshot_source();
 			}
 
 			var draw_bounds = function() {
@@ -132,11 +134,20 @@
 				truncate_text(quote_source, sbounds, 20, 'italic', style.font_color);
 			}
 
+			var draw_textshot_source = function() {
+				ctx.font = '20px ' + style.font_family;
+				ctx.fillStyle = style.sec_font_color;
+				ctx.textBaseline = 'top';
+				ctx.textAlign = 'right';
+				ctx.fillText('textshot.it', quote_width - bot_lr_padding, sbounds.y);
+			}
+
 			var truncate_text = function(text, bounds, font_size, font_attr, font_color) {
 				var words = text.split(' ');
 				var font_attr = defaultFor(font_attr, '');
 				ctx.font = font_attr + ' ' + font_size + 'px ' + style.font_family;
 				ctx.fillStyle = font_color;
+				ctx.textAlign = 'left';
 				ctx.textBaseline = 'top';
 
 				var line = '';
@@ -160,6 +171,7 @@
 
 				ctx.font = font_size + 'px ' + style.font_family;
 				ctx.fillStyle = style.font_color;
+				ctx.textAlign = 'left';
 				ctx.textBaseline = 'top';
 
 				var line = '';
