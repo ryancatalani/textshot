@@ -51,7 +51,7 @@ table {
 
 // texshot.it
 
-$break_width: 800px;
+$break_width: 768px;
 
 @mixin clear {
 	&:after {
@@ -65,7 +65,7 @@ $break_width: 800px;
 }
 
 @mixin base_font {
-	font: 14px/1.3em sans-serif;
+	font: 14px/1.3em 'adelle-sans', 'Proxima Nova', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -76,8 +76,8 @@ body {
 .wrap {
 	width: 95%;
 	margin: 0 auto;
-	@media(min-width: $break_width) {
-		width: 800px;
+	@media(min-width: 1000px) {
+		width: 1000px;
 	}
 }
 
@@ -96,61 +96,91 @@ body {
 nav {
 	@include clear;
 	background: #262A2D;
-	padding: 10px 0;
+	padding: 12px 0 10px;
 	margin-bottom: 1em;
+	color: #fff;
 	li {
-		display: inline-block;
-		float: right;
-	}
-	.navlogo {
+		display: block;
 		float: left;
+		height: 18px;
 	}
-	.navuser {
-		img {
-			height: 18px;
-			width: 18px;
+	ul.navlinks {
+		float: right;
+		li {
+			margin-left: 8px;		
 		}
+	}
+	img {
+		height: 18px;
+		width: 18px;
 	}
 }
 
 
-textarea, input[type=text] {
+textarea, input {
 	@include base_font;
 	width: 100%;
 	border: 1px solid #ccc;
+	border-radius: 5px;
 	padding: 0.75em;
 }
 
 .quote_input {
 	@include clear;
 	textarea {
-		height: 92px;
+		height: 150px;
+		margin-bottom: 10px;
 	}
 	input[type=text] {
-		height: 41px;
 		margin-bottom: 10px;
+	}
+	@media(min-width: 768px) {
+		width: 35%;
+		float: left;
 	}
 }
 
 .tweet_wrap {
 	background: #fff;
 	padding: 1em;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	@media(min-width: 768px) {
+		width: 63%;
+		margin-left: 2%;
+		float: left;
+	}
 	.tweet_input {
 		@include clear;
 		position: relative;
+		margin-bottom: 10px;
 		textarea {
 			border: 1px solid #E6E9E9;
+			margin-bottom: 5px;
 		}
 		#tweet_input_count {
 			position: absolute;
 			top: 5px;
 			right: 5px;
+			font-weight: bold;
+			background: #fff;
 		}
 		#tweet_input_btn {
-			position: absolute;
-			display: block;
-			bottom: 5px;
-			right: 5px;
+			background: #8898A7;
+			color: #fff;
+			text-shadow: 0px -1px darken(#8898A7, 20%);
+			border-color: darken(#8898A7, 10%);
+			display: inline-block;
+			width: auto;
+			&:hover {
+				cursor: pointer;
+				background: darken(#8898A7, 5%)
+			}
+		}
+		#tweet_input_signin {
+			@extend textarea;
+			@extend #tweet_input_btn;
+			text-decoration: none;
 		}
 	}
 }

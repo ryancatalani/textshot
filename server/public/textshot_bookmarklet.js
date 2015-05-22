@@ -57,6 +57,7 @@
 	iframe.src = base_url + params;
 	iframe.style.width = '100%';
 	iframe.style.height = '50%';
+	iframe.style.minHeight = '500px';
 	iframe.style.boxShadow = '0px 5px 20px 0px rgba(0,0,0,0.25)';
 	iframe.style.marginBottom = '20px';
 	body.insertBefore(iframe, body.childNodes[0]);
