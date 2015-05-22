@@ -35,10 +35,10 @@ window.onload = function() {
 	tweet_composer_el.onkeyup = function() { update_tweet_char_count(); }
 
 	var test_text = function() {
-		// quote_text_el.value = "With a few taps on a phone, for a fee, today’s hottest start-ups will help people on the lowest rungs of the 1 percent live like their betters in the 0.1 percent. These services give the modestly wealthy a chance to enjoy the cooks, cleaners, drivers, personal assistants and all the other lavish appointments that have defined extravagant wealth. As one critic tweeted, San Francisco’s tech industry “is focused on solving one problem: What is my mother no longer doing for me?”";
+		quote_text_el.value = "With a few taps on a phone, for a fee, today’s hottest start-ups will help people on the lowest rungs of the 1 percent live like their betters in the 0.1 percent. These services give the modestly wealthy a chance to enjoy the cooks, cleaners, drivers, personal assistants and all the other lavish appointments that have defined extravagant wealth. As one critic tweeted, San Francisco’s tech industry “is focused on solving one problem: What is my mother no longer doing for me?”";
 		// quote_text_el.value = "No, no, say the start-ups that, today, look as if they’re targeting the rich. The nature of the tech business is that costs come down.";
 		// quote_text_el.value = "Roberts, who gave her address unscripted, drew upon her own experiences from right after she graduated college from Southeastern Louisiana University to give advice to the students."
-		quote_text_el.value = "The ability to see what I did on any given day and visualize time spent in frequent location has been a useful addition to my iPhone – especially because I can forget about it, knowing that the app will always track my time and places in the background.";
+		// quote_text_el.value = "The ability to see what I did on any given day and visualize time spent in frequent location has been a useful addition to my iPhone – especially because I can forget about it, knowing that the app will always track my time and places in the background.";
 		quote_title_el.value = "A Tech Boom Aimed at the Few Instead of the World";
 		quote_source_el.value = "The New York Times";
 		tweet_composer_el.value = "A Tech Boom Aimed at the Few Instead of the World http://www.nytimes.com/2015/05/21/technology/personaltech/a-tech-boom-aimed-at-the-few-instead-of-the-world.html?ref=technology";
@@ -211,7 +211,8 @@ window.onload = function() {
 		var char_count = text.split('').length;
 		var word_count = text.split(' ').length - 1;
 		
-		var font_size = Math.floor(Math.sqrt(drawable_area / (char_count - (word_count * 1.5))));
+		var coef = (Math.log(Math.sqrt(word_count)) / Math.log(10)) + 0.6; // really log10(sqrt(word_count)) + 0.6
+		var font_size = Math.floor(Math.sqrt(drawable_area / (char_count - (word_count * coef))));
 		var line_height = Math.floor(style.line_height_em * font_size);
 
 		if (font_size >= (style.max_font_size * 0.9)) {
