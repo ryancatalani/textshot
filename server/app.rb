@@ -9,6 +9,8 @@ configure do
 		expire_after: 31536000,
 		secret: ENV['SESSION_SECRET']
 
+	set :protection, except: :frame_options
+
 	use OmniAuth::Builder do
 		provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
 	end

@@ -229,6 +229,22 @@ window.onload = function() {
 		dest.value = data;
 	}
 
+	var fill_from_url = function() {
+		var re = /tx=(.+)&ti=(.+)&so=(.+)&url=(.+)&go=t/;
+		var url_search = decodeURIComponent(window.location.search);
+		var vals = url_search.match(re);
+		if (vals !== null) {
+			quote_text_el.value = vals[1];
+			quote_title_el.value = vals[2];
+			quote_source_el.value = vals[3];
+			tweet_composer_el.value = vals[4];
+
+			update_quote();
+			update_tweet_char_count();
+		}
+	}
+
 	setup_canvas();
 	test_text();
+	fill_from_url();
 }
