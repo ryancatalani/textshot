@@ -97,12 +97,24 @@ nav {
 	@include clear;
 	background: #262A2D;
 	padding: 12px 0 10px;
-	margin-bottom: 1em;
 	color: #fff;
+	a {
+		&:link, &:visited {
+			color: #C5DCF3;
+		}
+		&:hover, &:active {
+			color: #CEE6FE;
+		}
+	}
 	li {
 		display: block;
 		float: left;
 		height: 18px;
+	}
+	ul.navlogo {
+		font-weight: bold;
+		font-size: 1.2em;
+		letter-spacing: .03em;
 	}
 	ul.navlinks {
 		float: right;
@@ -123,6 +135,10 @@ textarea, input {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	padding: 0.75em;
+}
+
+.main_wrap {
+	margin-top: 1em;
 }
 
 .quote_input {
@@ -182,5 +198,19 @@ textarea, input {
 			@extend #tweet_input_btn;
 			text-decoration: none;
 		}
+	}
+}
+
+.splash {
+	@include clear;
+	background: #D1E3F8;
+	padding: 1em 0;
+	h2 {
+		font-size: 30px;
+		line-height: 1.1em;
+		text-rendering: optimizeLegibility;
+	}
+	.splash_tweet {
+		float: right;
 	}
 }

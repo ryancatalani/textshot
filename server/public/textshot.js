@@ -250,6 +250,6 @@ window.onload = function() {
 	}
 
 	setup_canvas();
-	test_text();
+	// test_text();
 	fill_from_url();
 }
