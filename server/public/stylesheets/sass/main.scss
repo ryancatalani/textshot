@@ -150,6 +150,56 @@ textarea, input {
 	input[type=text] {
 		margin-bottom: 10px;
 	}
+	.quote_styles {
+		@include clear;
+		input[type=radio] {
+			display: none;
+			&:checked + .quote_style {
+				opacity: 1;
+			}
+		}
+		label {
+			display: block;
+			float: left;
+			width: 31%;
+			margin-left: 3.5%;
+			&:first-child {
+				margin-left: 0;
+			}
+			&:hover {
+				cursor: pointer;
+			}
+		}
+		.quote_style {
+			display: block;
+			opacity: 0.25;
+			width: 100%;
+			background: #ccc;
+			border: 1px solid #bbb;
+			border-radius: 5px;
+			text-align: center;
+			height: 60px;
+			line-height: 60px;
+		}
+		label[for=quote_style_sepia] .quote_style {
+			background: #FCFAEC;
+			border-color: #EEECD8;
+			color: #5A594F;
+			font-family: Georgia;
+		}
+		label[for=quote_style_light] .quote_style {
+			background: #fff;
+			border-color: #ddd;
+			color: #3E3E3E;
+			font-family: Georgia;
+		}
+		label[for=quote_style_dark] .quote_style {
+			background: #333;
+			border-color: #222;
+			color: #eee;
+			font-family: Georgia;
+		}
+	}
 	@media(min-width: 768px) {
 		width: 35%;
 		float: left;

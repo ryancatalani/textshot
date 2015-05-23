@@ -35,7 +35,7 @@
 		</div>
 	</nav>
 
-	<div class="splash">
+	<div class="splash" style="display:none">
 		<div class="wrap">
 			<h2>A simple way to quote articles and share them on Twitter.</h2>
 			<h3>For when 140 characters isn’t enough.</h3>
@@ -53,6 +53,24 @@
 			<textarea name="quote_text" id="quote_text" placeholder="Quote"></textarea>
 			<input type="text" id="quote_title" placeholder="Quote source title">
 			<input type="text" id="quote_source" placeholder="Quote source publication">
+
+			<div class="quote_styles">
+				<label for="quote_style_sepia">
+					<input type="radio" name="quote_style" id="quote_style_sepia" checked="checked" value="sepia">
+					<span class="quote_style">Sepia</span>
+				</label>
+				
+				<label for="quote_style_light">
+					<input type="radio" name="quote_style" id="quote_style_light" value="light">
+					<span class="quote_style">Light</span>
+				</label>
+				
+				<label for="quote_style_dark">
+					<input type="radio" name="quote_style" id="quote_style_dark" value="dark">
+					<span class="quote_style">Dark</span>
+				</label>	
+				
+			</div>
 		</div>
 
 		<div class="tweet_wrap">

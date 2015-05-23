@@ -14,24 +14,19 @@ window.onload = function() {
 	var quote_text_el = document.getElementById('quote_text');
 	var quote_title_el = document.getElementById('quote_title');
 	var quote_source_el = document.getElementById('quote_source');
+	var quote_style_els = document.getElementsByName('quote_style');
 
 	var tweet_composer_el = document.getElementById('tweet_input_composer');
 	var tweet_count_el = document.getElementById('tweet_input_count');
 
-	style = {
-		bkgd: '#FCFAEC',
-		sec_bkgd: '#EEECD8',
-		font_family: 'Georgia',
-		font_color: '#5A594F',
-		sec_font_color: '#95947F',
-		max_font_size: 60,
-		line_height_em: 1.4,
-		max_line_height_em: 1.25
-	};
-
 	quote_text_el.onkeyup = function() { update_quote(); }
 	quote_title_el.onkeyup = function() { update_quote(); }
 	quote_source_el.onkeyup = function() { update_quote(); }
+	for (var i = quote_style_els.length - 1; i >= 0; i--) {
+		quote_style_els[i].onclick = function() {
+			set_style(this.value);
+		}
+	};
 	tweet_composer_el.onkeyup = function() { update_tweet_char_count(); }
 
 	var test_text = function() {
@@ -107,6 +102,7 @@ window.onload = function() {
 			height: 20
 		};
 
+		set_style('sepia');
 		clear_canvas();
 	}
 
@@ -247,6 +243,50 @@ window.onload = function() {
 			update_quote();
 			update_tweet_char_count();
 		}
+	}
+
+	var set_style = function(sel_style) {
+		var sepia = {
+			bkgd: '#FCFAEC',
+			sec_bkgd: '#EEECD8',
+			font_family: 'Georgia',
+			font_color: '#5A594F',
+			sec_font_color: '#95947F',
+			max_font_size: 60,
+			line_height_em: 1.4,
+			max_line_height_em: 1.25
+		};
+		var light = {
+			bkgd: '#fff',
+			sec_bkgd: '#eee',
+			font_family: 'Georgia',
+			font_color: '#3E3E3E',
+			sec_font_color: '#828282',
+			max_font_size: 60,
+			line_height_em: 1.4,
+			max_line_height_em: 1.25
+		};
+		var dark = {
+			bkgd: '#333',
+			sec_bkgd: '#444',
+			font_family: 'Georgia',
+			font_color: '#fff',
+			sec_font_color: '#aaa',
+			max_font_size: 60,
+			line_height_em: 1.4,
+			max_line_height_em: 1.25
+		};
+		var styles = {
+			"sepia": sepia,
+			"light": light,
+			"dark": dark
+		};
+		if (styles[sel_style] !== undefined) {
+			style = styles[sel_style];
+		} else {
+			style = styles['sepia'];
+		}
+		update_quote();
 	}
 
 	setup_canvas();
