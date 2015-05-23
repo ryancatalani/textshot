@@ -5,7 +5,6 @@ require 'twitter'
 configure do
 	set :sessions,
 		httponly: true,
-		secure: production?,
 		expire_after: 31536000,
 		secret: ENV['SESSION_SECRET']
 
