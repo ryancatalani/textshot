@@ -150,7 +150,7 @@ window.onload = function() {
 		ctx.fillStyle = style.sec_font_color;
 		ctx.textBaseline = 'top';
 		ctx.textAlign = 'right';
-		ctx.fillText('textshot.it', quote_width - bot_lr_padding, sbounds.y);
+		ctx.fillText('textshot.co', quote_width - bot_lr_padding, sbounds.y);
 	}
 
 	var truncate_text = function(text, bounds, font_size, font_attr, font_color) {
