@@ -45,7 +45,7 @@
 		+ encodeURIComponent(url) 
 		+ '&go=t';
 
-	base_url = 'http://localhost:9292/'
+	base_url = 'http://www.textshot.co/'
 
 	var ifc = 0;
 	var body = document.getElementsByTagName('body')[0];

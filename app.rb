@@ -45,7 +45,6 @@ end
 
 get '/auth/twitter/callback' do
 	auth = env['omniauth.auth']
-	logger.info auth
 	session[:twitter] = {}
 	session[:twitter][:nickname] = auth.info.nickname
 	session[:twitter][:img] = auth.info.image
