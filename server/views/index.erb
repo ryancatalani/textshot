@@ -35,38 +35,54 @@
 		</div>
 	</nav>
 
-	<div class="splash" style="display:none">
+	<% if !current_user %>
+	<div class="splash">
 		<div class="wrap">
-			<h2>A simple way to quote articles and share them on Twitter.</h2>
-			<h3>For when 140 characters isn’t enough.</h3>
 
-			<div class="splash_tweet">
-				<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">.<a href="https://twitter.com/fmanjoo">@fmanjoo</a>: Today’s startups help the “1 percent live like their betters in the 0.1 percent.” <a href="http://t.co/PgKnoZlmkn">http://t.co/PgKnoZlmkn</a> <a href="http://t.co/EAGLnOd83a">pic.twitter.com/EAGLnOd83a</a></p>&mdash; Ryan Catalani (@magicofpi) <a href="https://twitter.com/magicofpi/status/601170194602565632">May 20, 2015</a></blockquote>
-				<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+			<h1>A simple way to quote articles and share them on Twitter.</h1>
+
+			<div class="samples">
+				<img src="images/sample1.png" alt="">
+				<img src="images/sample2.png" alt="">
+				<img src="images/sample3.png" alt="">	
 			</div>
+
+			<h2>To get started, install the bookmarklet.</h2>
+			<h3>Drag this button <a class="textshot_bookmarklet" href='javascript:!function(){var t,e,o,n,i,r,m;t=window.getSelection().toString();for(var d=document.getElementsByTagName("meta"),l=d.length-1;l>=0;l--)"og:title"==d[l].getAttribute("property")&&(e=d[l].getAttribute("content")),"og:site_name"==d[l].getAttribute("property")&&(o=d[l].getAttribute("content")),"cre"==d[l].getAttribute("name")&&(o=d[l].getAttribute("content")),"og:url"==d[l].getAttribute("property")&&(n=d[l].getAttribute("content"));void 0===e&&(e=document.getElementsByTagName("source_title")[0].innerText),void 0===o&&(o=window.location.hostname),(void 0===t||""===t)&&(t=" "),void 0===n&&(n=window.location.href),r="?tx="+encodeURIComponent(t)+"&ti="+encodeURIComponent(e)+"&so="+encodeURIComponent(o)+"&url="+encodeURIComponent(n)+"&go=t",i="http://localhost:9292/";var g=0,a=document.getElementsByTagName("body")[0];null!==document.getElementById("textshot_iframe")&&a.removeChild(document.getElementById("textshot_iframe")),m=document.createElement("iframe"),m.id="textshot_iframe",m.src=i+r,m.style.width="100%",m.style.height="50%",m.style.minHeight="500px",m.style.boxShadow="0px 5px 20px 0px rgba(0,0,0,0.25)",m.style.marginBottom="20px",a.insertBefore(m,a.childNodes[0]),m.addEventListener("load",function(){g++,g>1&&a.removeChild(document.getElementById("textshot_iframe"))},!1),window.scrollTo(0,0)}();'>Textshot</a> to your bookmarks bar.</h3>
+
+			<img src="images/install.gif" alt="How to install Textshot." class="img_center">
+
+			<h3>When you want to quote an article, select some text and click the Textshot bookmarklet.</h3>
+
+			<img src="images/splash.gif" alt="How to use Textshot." class="img_center">
+
+			<h2>That’s it! <a href="/auth/twitter">Sign in with Twitter</a> to share your Textshots.</h2>
+			<h3>Textshot.it doesn’t save any of your data. It’s also open-source.</h3>
+			
 		
 		</div>
 	</div>
+	<% end %>
 
 	<div class="wrap main_wrap">
 		<div class="quote_input">
-			<textarea name="quote_text" id="quote_text" placeholder="Quote"></textarea>
-			<input type="text" id="quote_title" placeholder="Quote source title">
-			<input type="text" id="quote_source" placeholder="Quote source publication">
+			<textarea name="quote_text" id="quote_text" placeholder="Quote" <% if !current_user %>disabled<% end %>></textarea>
+			<input type="text" id="quote_title" placeholder="Quote source title" <% if !current_user %>disabled<% end %>>
+			<input type="text" id="quote_source" placeholder="Quote source publication" <% if !current_user %>disabled<% end %>>
 
 			<div class="quote_styles">
 				<label for="quote_style_sepia">
-					<input type="radio" name="quote_style" id="quote_style_sepia" checked="checked" value="sepia">
+					<input type="radio" name="quote_style" id="quote_style_sepia" checked="checked" value="sepia" <% if !current_user %>disabled<% end %>>
 					<span class="quote_style">Sepia</span>
 				</label>
 				
 				<label for="quote_style_light">
-					<input type="radio" name="quote_style" id="quote_style_light" value="light">
+					<input type="radio" name="quote_style" id="quote_style_light" value="light" <% if !current_user %>disabled<% end %>>
 					<span class="quote_style">Light</span>
 				</label>
 				
 				<label for="quote_style_dark">
-					<input type="radio" name="quote_style" id="quote_style_dark" value="dark">
+					<input type="radio" name="quote_style" id="quote_style_dark" value="dark" <% if !current_user %>disabled<% end %>>
 					<span class="quote_style">Dark</span>
 				</label>	
 				
@@ -76,12 +92,12 @@
 		<div class="tweet_wrap">
 			<form action="/post_tweet" method="post" enctype="multipart/form-data">
 				<div class="tweet_input">
-					<textarea name="tweet_input_composer" id="tweet_input_composer" cols="30" rows="3" placeholder="Your tweet"></textarea>
+					<textarea name="tweet_input_composer" id="tweet_input_composer" cols="30" rows="3" placeholder="Your tweet" <% if !current_user %>disabled<% end %>></textarea>
 					<div id="tweet_input_count">116</div>
 					<% if current_user %>
 					<input type="submit" id="tweet_input_btn" value="Tweet textshot">
 					<% else %>
-					<a href="/auth/twitter" id="tweet_input_signin">Sign in with Twitter to tweet this textshot</a>
+					<a href="/auth/twitter" id="tweet_input_signin">Sign in with Twitter to use Textshot</a>
 					<% end %>
 				</div>
 

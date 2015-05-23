@@ -211,9 +211,11 @@ textarea, input {
 	padding: 1em;
 	border: 1px solid #ccc;
 	border-radius: 5px;
+	margin-top: 10px;
 	@media(min-width: 768px) {
 		width: 63%;
 		margin-left: 2%;
+		margin-top: 0;
 		float: left;
 	}
 	.tweet_input {
@@ -254,13 +256,79 @@ textarea, input {
 .splash {
 	@include clear;
 	background: #D1E3F8;
-	padding: 1em 0;
-	h2 {
+	padding: 1em 0 40px;
+	h1 {
 		font-size: 30px;
 		line-height: 1.1em;
 		text-rendering: optimizeLegibility;
+		text-align: center;
+		margin: 40px 0 20px;
+		font-weight: bold;
 	}
-	.splash_tweet {
-		float: right;
+	h2 {
+		font-size: 30px;
+		line-height: 1.3em;
+		text-rendering: optimizeLegibility;
+		text-align: center;
+		margin: 40px 0 20px;
+		font-weight: 300;
+	}
+	h3 {
+		font-size: 20px;
+		line-height: 1.3em;
+		text-align: center;
+		margin-top: 10px;
+		margin-bottom: 40px;
+	}
+	a {
+		&:link, &:visited {
+			color: #5C6E8E;
+			text-decoration: none;
+			border-bottom: 2px solid #5C6E8E;
+		}
+		&:hover, &:active {
+			color: #7C8FB1;
+			border-bottom: 2px solid #7C8FB1;
+		}
+	}
+	.img_center {
+		width: 600px;
+		max-width: 100%;
+		margin: 0 auto 40px;
+		display: block;
+		border: 3px solid rgba(255,255,255,0.4);
+	}
+	.samples {
+		@include clear;
+		margin-top: 40px;
+		img {
+			display: block;
+			border: 3px solid rgba(255,255,255,0.4);
+			width: 100%;
+			margin-bottom: 10px;
+			@media(min-width: 768px) {
+				width: 32.5%;
+				margin-left: 1.25%;
+				margin-bottom: 0;
+				float: left;
+			}
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+	}
+	.textshot_bookmarklet {
+		&:link, &:visited {
+			border: 1px solid darken(#5C6E8E, 10%);
+			padding: 0.1em 0.6em;
+			margin: 0 0.3em;
+			border-radius: 5px;
+			text-decoration: none;
+			background: #5C6E8E;
+			color: #fff;
+		}
+		&:hover, &:active {
+			background: #7C8FB1;
+		}
 	}
 }
