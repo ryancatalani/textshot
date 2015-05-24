@@ -1,6 +1,6 @@
 # Textshot
 
-A simple way to quote articles and share them on Twitter. Inspired by [Instapaper](https://medium.com/making-instapaper/instapaper-tweet-shots-5df8587988e8), [Medium](https://medium.com/the-story/text-shots-3f82f2536cc), and [OneShot](http://oneshot.link/).
+A simple way to quote articles and share them on Twitter. Visit it at [textshot.co](http://www.textshot.co). Inspired by [Instapaper](https://medium.com/making-instapaper/instapaper-tweet-shots-5df8587988e8), [Medium](https://medium.com/the-story/text-shots-3f82f2536cc), and [OneShot](http://oneshot.link/).
 
 ## How it works
 
