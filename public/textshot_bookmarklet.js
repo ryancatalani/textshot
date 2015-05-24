@@ -47,28 +47,36 @@
 
 	base_url = 'http://www.textshot.co/'
 
-	var ifc = 0;
-	var body = document.getElementsByTagName('body')[0];
-	if (document.getElementById('textshot_iframe') !== null) {
-		body.removeChild(document.getElementById('textshot_iframe'));
-	}
-	iframe = document.createElement('iframe');
-	iframe.id = "textshot_iframe";
-	iframe.src = base_url + params;
-	iframe.style.width = '100%';
-	iframe.style.height = '50%';
-	iframe.style.minHeight = '500px';
-	iframe.style.boxShadow = '0px 5px 20px 0px rgba(0,0,0,0.25)';
-	iframe.style.marginBottom = '20px';
-	body.insertBefore(iframe, body.childNodes[0]);
-
-	iframe.addEventListener('load', function(e){
-		ifc++;
-		if (ifc > 1) {
+	if (window.location.protocol === 'http:') {
+		var ifc = 0;
+		var body = document.getElementsByTagName('body')[0];
+		if (document.getElementById('textshot_iframe') !== null) {
 			body.removeChild(document.getElementById('textshot_iframe'));
 		}
-	}, false);
+		iframe = document.createElement('iframe');
+		iframe.id = "textshot_iframe";
+		iframe.src = base_url + params;
+		iframe.style.width = '100%';
+		iframe.style.height = '50%';
+		iframe.style.minHeight = '500px';
+		iframe.style.boxShadow = '0px 5px 20px 0px rgba(0,0,0,0.25)';
+		iframe.style.marginBottom = '20px';
+		body.insertBefore(iframe, body.childNodes[0]);
 
-	window.scrollTo(0,0);
+		iframe.addEventListener('load', function(e){
+			ifc++;
+			if (ifc > 1) {
+				body.removeChild(document.getElementById('textshot_iframe'));
+			}
+		}, false);
+
+		window.scrollTo(0,0);
+	} else {
+		window.open(
+			base_url + params,
+			'Textshot',
+			'resizable,scrollbars'
+		);
+	}
 
 })();
