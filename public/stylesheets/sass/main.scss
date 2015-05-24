@@ -70,7 +70,7 @@ $break_width: 768px;
 
 body {
 	@include base_font;	
-	background: #F7F7F7;
+	background: #DFDFDF;
 }
 
 .wrap {
@@ -137,9 +137,10 @@ textarea, input {
 	padding: 0.75em;
 }
 
-.main_wrap {
+.app_wrap {
 	@include clear;
-	margin-top: 1em;
+	padding: 1em 0 100px;
+	background: #F7F7F7;
 }
 
 .quote_input {
@@ -335,8 +336,6 @@ textarea, input {
 }
 
 footer {
-	background: #DFDFDF;
-	margin-top: 40px;
 	border-top: 1px solid #D2D2D2;
 	padding: 20px 0;
 	color: #595959;

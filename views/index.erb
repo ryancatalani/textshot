@@ -57,55 +57,56 @@
 			<img src="//textshot.s3.amazonaws.com/public/splash.gif" alt="How to use Textshot." class="img_center">
 
 			<h2>That’s it! <a href="/auth/twitter">Sign in with Twitter</a> to share your Textshots.</h2>
-			<h3>Textshot.it doesn’t save any of your data. It’s also <a href="https://github.com/ryancatalani/textshot">open-source</a>. Follow <a href="https://twitter.com/textshotco" target="_blank">@textshotco</a> for the latest.</h3>
+			<h3>Textshot.it doesn’t save any of your data. It’s also <a href="https://github.com/ryancatalani/textshot" target="_blank">open-source</a>. Follow <a href="https://twitter.com/textshotco" target="_blank">@textshotco</a> for the latest.</h3>
 			
 		
 		</div>
 	</div>
 	<% end %>
 
-	<div class="wrap main_wrap">
-		<div class="quote_input">
-			<textarea name="quote_text" id="quote_text" placeholder="Quote" <% if !current_user %>disabled<% end %>></textarea>
-			<input type="text" id="quote_title" placeholder="Quote source title" <% if !current_user %>disabled<% end %>>
-			<input type="text" id="quote_source" placeholder="Quote source publication" <% if !current_user %>disabled<% end %>>
+	<div class="app_wrap">
+		<div class="wrap">
+			<div class="quote_input">
+				<textarea name="quote_text" id="quote_text" placeholder="Quote" <% if !current_user %>disabled<% end %>></textarea>
+				<input type="text" id="quote_title" placeholder="Quote source title" <% if !current_user %>disabled<% end %>>
+				<input type="text" id="quote_source" placeholder="Quote source publication" <% if !current_user %>disabled<% end %>>
 
-			<div class="quote_styles">
-				<label for="quote_style_sepia">
-					<input type="radio" name="quote_style" id="quote_style_sepia" checked="checked" value="sepia" <% if !current_user %>disabled<% end %>>
-					<span class="quote_style">Sepia</span>
-				</label>
-				
-				<label for="quote_style_light">
-					<input type="radio" name="quote_style" id="quote_style_light" value="light" <% if !current_user %>disabled<% end %>>
-					<span class="quote_style">Light</span>
-				</label>
-				
-				<label for="quote_style_dark">
-					<input type="radio" name="quote_style" id="quote_style_dark" value="dark" <% if !current_user %>disabled<% end %>>
-					<span class="quote_style">Dark</span>
-				</label>	
-				
+				<div class="quote_styles">
+					<label for="quote_style_sepia">
+						<input type="radio" name="quote_style" id="quote_style_sepia" checked="checked" value="sepia" <% if !current_user %>disabled<% end %>>
+						<span class="quote_style">Sepia</span>
+					</label>
+					
+					<label for="quote_style_light">
+						<input type="radio" name="quote_style" id="quote_style_light" value="light" <% if !current_user %>disabled<% end %>>
+						<span class="quote_style">Light</span>
+					</label>
+					
+					<label for="quote_style_dark">
+						<input type="radio" name="quote_style" id="quote_style_dark" value="dark" <% if !current_user %>disabled<% end %>>
+						<span class="quote_style">Dark</span>
+					</label>	
+					
+				</div>
+			</div>
+
+			<div class="tweet_wrap">
+				<form action="/post_tweet" method="post" enctype="multipart/form-data">
+					<div class="tweet_input">
+						<textarea name="tweet_input_composer" id="tweet_input_composer" cols="30" rows="3" placeholder="Your tweet" <% if !current_user %>disabled<% end %>></textarea>
+						<div id="tweet_input_count">116</div>
+						<% if current_user %>
+						<input type="submit" id="tweet_input_btn" value="Tweet textshot">
+						<% else %>
+						<a href="/auth/twitter" id="tweet_input_signin">Sign in with Twitter to use Textshot</a>
+						<% end %>
+					</div>
+
+					<canvas id="textshot"></canvas>	
+					<input type="hidden" id="tweet_input_img" name="tweet_input_img">
+				</form>
 			</div>
 		</div>
-
-		<div class="tweet_wrap">
-			<form action="/post_tweet" method="post" enctype="multipart/form-data">
-				<div class="tweet_input">
-					<textarea name="tweet_input_composer" id="tweet_input_composer" cols="30" rows="3" placeholder="Your tweet" <% if !current_user %>disabled<% end %>></textarea>
-					<div id="tweet_input_count">116</div>
-					<% if current_user %>
-					<input type="submit" id="tweet_input_btn" value="Tweet textshot">
-					<% else %>
-					<a href="/auth/twitter" id="tweet_input_signin">Sign in with Twitter to use Textshot</a>
-					<% end %>
-				</div>
-
-				<canvas id="textshot"></canvas>	
-				<input type="hidden" id="tweet_input_img" name="tweet_input_img">
-			</form>
-		</div>
-			
 	</div>
 
 	<footer>
@@ -113,7 +114,7 @@
 			<p>To install the bookmarklet, drag this button <a class="textshot_bookmarklet" href='javascript:!function(){var t,e,o,n,i,r,m;t=window.getSelection().toString();for(var d=document.getElementsByTagName("meta"),l=d.length-1;l>=0;l--)"og:title"==d[l].getAttribute("property")&&(e=d[l].getAttribute("content")),"og:site_name"==d[l].getAttribute("property")&&(o=d[l].getAttribute("content")),"cre"==d[l].getAttribute("name")&&(o=d[l].getAttribute("content")),"og:url"==d[l].getAttribute("property")&&(n=d[l].getAttribute("content"));void 0===e&&(e=document.getElementsByTagName("source_title")[0].innerText),void 0===o&&(o=window.location.hostname),(void 0===t||""===t)&&(t=" "),void 0===n&&(n=window.location.href),r="?tx="+encodeURIComponent(t)+"&ti="+encodeURIComponent(e)+"&so="+encodeURIComponent(o)+"&url="+encodeURIComponent(n)+"&go=t",i="http://www.textshot.co/";var g=0,a=document.getElementsByTagName("body")[0];null!==document.getElementById("textshot_iframe")&&a.removeChild(document.getElementById("textshot_iframe")),m=document.createElement("iframe"),m.id="textshot_iframe",m.src=i+r,m.style.width="100%",m.style.height="50%",m.style.minHeight="500px",m.style.boxShadow="0px 5px 20px 0px rgba(0,0,0,0.25)",m.style.marginBottom="20px",a.insertBefore(m,a.childNodes[0]),m.addEventListener("load",function(){g++,g>1&&a.removeChild(document.getElementById("textshot_iframe"))},!1),window.scrollTo(0,0)}();'>Textshot</a> to your bookmarks bar.</p>
 
 			<p>
-				Textshot is <a href="https://github.com/ryancatalani/textshot">open-source</a>. Follow <a href="https://twitter.com/textshotco" target="_blank">@textshotco</a> for the latest. Made by <a href="http://ryancatalani.com" target="_blank">Ryan Catalani</a> (<a href="https://twitter.com/magicofpi" target="_blank">@magicofpi</a>).
+				Textshot is <a href="https://github.com/ryancatalani/textshot" target="_blank">open-source</a>. Follow <a href="https://twitter.com/textshotco" target="_blank">@textshotco</a> for the latest. Made by <a href="http://ryancatalani.com" target="_blank">Ryan Catalani</a> (<a href="https://twitter.com/magicofpi" target="_blank">@magicofpi</a>).
 			</p>
 		</div>
 	</footer>
