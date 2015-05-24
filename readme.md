@@ -4,7 +4,15 @@ A simple way to quote articles and share them on Twitter. Inspired by [Instapape
 
 ## How it works
 
-The textshot (image) is generated in the browser using `canvas`. The `canvas` data is passed through a small [Sinatra](http://www.sinatrarb.com/) app, which authenticates the user on Twitter (with [OmniAuth Twitter](https://github.com/arunagw/omniauth-twitter)) then posts the tweet (with the [Twitter gem](https://github.com/sferik/twitter)). The bookmarklet works by adding an `iframe` to the top of an article page, which fills in the textshot based on the article's metadata.
+The textshot (image) is generated in the browser using `canvas`. The `canvas` data is passed through a small [Sinatra](http://www.sinatrarb.com/) app, which authenticates the user on Twitter (with [OmniAuth Twitter](https://github.com/arunagw/omniauth-twitter)) then posts the tweet (with the [Twitter gem](https://github.com/sferik/twitter)). The bookmarklet works by adding an `iframe` to the top of an article page, which fills in the textshot based on the user's text selection and the article's metadata.
+
+## Installation notes
+
+Requires Ruby. You must also create an [app on Twitter](http://apps.twitter.com) and set the `CONSUMER_KEY` and `CONSUMER_SECRET` environment variables. You must also set a `SESSION_SECRET` variable for Rack. I always prefer to use [Sass](http://sass-lang.com/) (with the Sass gem), which is enabled in `config.ru`. In development, launch with `rackup`.
+
+## Contact
+
+Textshot is certainly not perfect. Please let me know ([@magicofpi](https://twitter.com/magicofpi), ryan@ryancatalani.com) if you identify problems or have suggestions.
 
 ## License
 
